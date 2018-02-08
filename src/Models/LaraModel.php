@@ -1,0 +1,34 @@
+<?php
+namespace LaraModel\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+use LaraModel\Builder\LaraEloquentBuilder;
+use LaraModel\Builder\LaraQueryBuilder;
+use LaraModel\Traits\ModelExtrasTrait;
+
+class LaraModel extends Model
+{
+    use ModelExtrasTrait;
+
+    /**
+     * @return LaraQueryBuilder
+     */
+    protected function newBaseQueryBuilder()
+    {
+        $connection = $this->getConnection();
+
+        return new LaraQueryBuilder(
+            $connection, $connection->getQueryGrammar(), $connection->getPostProcessor()
+        );
+    }
+
+    /**
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return LaraEloquentBuilder
+     */
+    public function newEloquentBuilder($query)
+    {
+        return new LaraEloquentBuilder($query);
+    }
+}

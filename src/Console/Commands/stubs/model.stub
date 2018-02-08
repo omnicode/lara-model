@@ -1,0 +1,16 @@
+<?php
+namespace _modelNamespace;
+
+
+class _Class extends _parent
+{
+    protected $fillable = [
+
+    ];
+
+    public function test()
+    {
+
+    }
+
+}

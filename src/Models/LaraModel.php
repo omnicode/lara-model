@@ -2,7 +2,6 @@
 namespace LaraModel\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use LaraModel\Builder\LaraEloquentBuilder;
 use LaraModel\Builder\LaraQueryBuilder;
 use LaraModel\Traits\ModelExtrasTrait;
@@ -10,6 +9,29 @@ use LaraModel\Traits\ModelExtrasTrait;
 class LaraModel extends Model
 {
     use ModelExtrasTrait;
+    /**
+     * @var
+     */
+    protected $indexable;
+
+    /**
+     * @var
+     */
+    protected $showable;
+
+    /**
+     * @var string
+     */
+    protected $statusColumn = 'status';
+
+    /**
+     * @var array
+     */
+    protected $actions = [
+        'show',
+        'edit',
+        'destroy'
+    ];
 
     /**
      * @return LaraQueryBuilder

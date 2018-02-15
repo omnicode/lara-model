@@ -1,7 +1,7 @@
 {
-	"name": "omnicode/lara-crud",
-	"description": "Ready CRUD actions",
-	"keywords": ["laravel", "bootstrapping", "crud"],
+	"name": "omnicode/lara-model",
+	"description": "Useful model methods",
+	"keywords": ["laravel", "bootstrapping", "model"],
 	"license": "MIT",
 	"authors": [
 		{

@@ -5,7 +5,6 @@ namespace LaraModel\Traits;
 use Cake\Utility\Hash;
 use Cake\Utility\Inflector;
 use Illuminate\Support\Facades\DB;
-use LaraTools\Utility\LaraUtil;
 
 trait ModelExtrasTrait
 {
@@ -74,7 +73,7 @@ trait ModelExtrasTrait
         foreach ($relations as $relationName => $relation) {
             // relation exists
             if (isset($associated[$relationName])) {
-                $relationType = LaraUtil::getRelationType($relation);
+                $relationType = class_basename($relation);
                 // for BelongsToMany
                 if ($relationType == 'BelongsToMany') {
                     $key = $relationName . '_ids';
@@ -121,8 +120,10 @@ trait ModelExtrasTrait
     public function _getRelations()
     {
         $response = [];
-        foreach ($this->_relations as $rel) {
-            $response[$rel] = $this->{$rel}();
+        if (is_array($this->_relations)) {
+            foreach ($this->_relations as $rel) {
+                $response[$rel] = $this->{$rel}();
+            }
         }
         return $response;
     }
@@ -198,6 +199,7 @@ trait ModelExtrasTrait
     /**
      * get list of columns that are allowed to be sorted
      * @param null $column - if provided checks whether provided column exists
+     * @param null $group
      * @return array|bool
      */
     public function getSortable($column = null, $group = null)

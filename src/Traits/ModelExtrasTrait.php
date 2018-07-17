@@ -106,7 +106,8 @@ trait ModelExtrasTrait
         }
         if ($status) {
             DB::commit();
-            return $model->id;
+            $foreignKey = $model->getKeyName();
+            return $model->{$foreignKey};
         }
         DB::rollback();
         return false;

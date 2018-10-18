@@ -99,6 +99,13 @@ trait ModelExtrasTrait
                         });
                         $model->{$relationName}()->saveMany($saveMany);
                     }
+                } elseif ($relationType == 'HasOne') {
+                    // delete existing data
+                    $model->{$relationName}()->forceDelete();
+                    if (!empty($data[$relationName])) {
+                        $saveOne = $data[$relationName];
+                        $model->{$relationName}()->create($saveOne);
+                    }
                 } elseif ($relationType == 'BelongsTo') {
                     dbg('belongs to');
                     die;

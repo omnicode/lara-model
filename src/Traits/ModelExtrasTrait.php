@@ -59,7 +59,7 @@ trait ModelExtrasTrait
         }
         if (empty($options['associated'])) {
             DB::commit();
-            return $model->id;
+            return $model;
         }
         $associated = [];
         foreach ($options['associated'] as $k => $v) {
@@ -114,8 +114,7 @@ trait ModelExtrasTrait
         }
         if ($status) {
             DB::commit();
-            $foreignKey = $model->getKeyName();
-            return $model->{$foreignKey};
+            return $model;
         }
         DB::rollback();
         return false;
